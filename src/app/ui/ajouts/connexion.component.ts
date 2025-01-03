@@ -4,10 +4,10 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-new-user',
+  selector: 'app-connexion',
   imports: [ToolbarComponent,FormsModule, RouterLink],
   template: `
-  <app-toolbar title="Ajouter un étudient"/>
+  <app-toolbar title="connexion"/>
   <form  
       class="form-container" 
       #sessionForm="ngForm"
@@ -15,8 +15,6 @@ import { RouterLink } from '@angular/router';
     >
       <label for="nom">votre nom:</label>
       <input type="text" placeholder="Nom complet" name="nom" required [(ngModel)]="formData.name">
-      <label for="email">adresse email:</label>
-      <input type="email" name="email" required [(ngModel)]="formData.email">
       <label for="pass">mot de passe:</label>
       <input type="password" name="pass" required [(ngModel)]="formData.pass">
       <div align="end">
@@ -28,10 +26,9 @@ import { RouterLink } from '@angular/router';
 
   `
 })
-export default class NewUserComponent {
+export default class ConnexionComponent{
   formData={
     name:'',
-    email:'',
     pass:'',
   };
   onsubmit(sessionForm: NgForm){

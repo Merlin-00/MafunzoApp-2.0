@@ -1,65 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ToolbarComponent } from '../shared/toolbar.component';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../core/services/user.service';
+import { Valid } from '../core/model/valid-model.component';
 
 @Component({
   selector: 'app-add-lesson',
-  imports: [ToolbarComponent,FormsModule],
+  imports: [ToolbarComponent, ReactiveFormsModule],
   template: `
   <app-toolbar title="Ajouter une Lesson"/>
   <form  
-      class="form-container" 
-      #sessionForm="ngForm"
-      (ngSubmit)="onsubmit(sessionForm)"
+      class="form-container"
+      [formGroup]="formData"
+      (ngSubmit)="onsubmit()"
     >
+    @let controls= formData.controls;
       <label for="nom">votre nom:</label>
-      <input type="text" placeholder="Nom complet" name="nom" required [(ngModel)]="formData.name">
+      <input type="text" placeholder="Nom complet" name="nom" formControlName="name">
+      @if (controls.name.hasError('required') && controls.name.touched) {
+      <span class="erreur">ce champ est obligatoire</span>
+      }
       <label for="date">date de la session:</label>
-      <input type="date" name="date" required [(ngModel)]="formData.date">
+      <input type="date" name="date" formControlName="date">
+      @if (controls.date.hasError('required') && controls.date.touched) {
+      <span class="erreur">ce champ est obligatoire</span>
+      }
       <label for="time">heure de la session:</label>
-      <input type="time" name="time" required [(ngModel)]="formData.time">
+      <input type="time" name="time" required formControlName="time">
+      @if (controls.time.hasError('required') && controls.time.touched) {
+      <span class="erreur">ce champ est obligatoire</span>
+      }
+      <label for="detail">detail de la session:</label>
+      <textarea name="detail" placeholder="infos concernant la session" formControlName="detail"></textarea>
+      @if (controls.detail.hasError('required') && controls.detail.touched) {
+      <span class="erreur">ce champ est obligatoire</span>
+      }
       <div align="end">
-        <button type="submit" [disabled]="sessionForm.invalid" [class.invalidForm]="sessionForm.invalid">Soumettre</button>
+        <button type="submit">Soumettre</button>
       </div>
     </form>
   `,
   styles: `
-  .form-container{
-    max-width: 720px;
-    margin: auto;
-
-    input, textarea{
-      width: 100%;
-      font-size: 1rem;
-      margin: 1rem 0;
-      padding: 0.5rem;
+    .erreur{
+      color: red;
     }
-
-    .invalidForm{
-      background-color: grey;
-      opacity: 0.5;
-    }
-
-    input:user-valid,
-    textarea:user-valid{
-      border-color:green;
-    }
-    input:user-invalid,
-    textarea:user-invalid{
-      border-color: red;
-    }
-  }
   `
 })
-export default class AddLessonComponent {
-  formData={
-    name:'',
-    date:'',
-    time:'',
-  };
-  onsubmit(sessionForm: NgForm){
-    console.log('Données du formulaire: ',sessionForm.value);
-    sessionForm.reset(); 
+export default class AddLessonComponent implements OnInit{
+  formu= inject(FormBuilder)
+  formData= this.formu.nonNullable.group(
+    {
+    name:['', [Validators.required]],
+    date:['',[Validators.required]],
+    time:['',[Validators.required]],
+    detail:['',[Validators.required]]
+  });
+  route = inject(Router)
+  ls= inject(UserService)
+  ngOnInit(): void {
+    if (history.state.name) {
+      const lesson= history.state as Valid
+      this.formData.patchValue(lesson)
+    } 
+  }
+  onsubmit(){
+    if (this.formData.valid) {
+      const lesson: Valid = {
+        ...this.formData.getRawValue(),
+      };
+      if (history.state.id) {
+        const id= Number(history.state.id)
+        this.ls.onEditL(id, lesson)
+      }else{
+        this.ls.addCours(lesson)
+      }
+      this.route.navigate(['/lesson'])
+    }else{
+      this.formData.markAllAsTouched();
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
-import { RouteService } from './ui/services/route.service';
+import { RouteService } from './ui/core/services/route.service';
 
 export const routes: Routes = [
    {
@@ -13,6 +13,11 @@ export const routes: Routes = [
     path:'login',
     title:'mafunzo-connexion',
     loadComponent: ()=>import('./ui/login/login.component')
+   },
+   { 
+    path:'connexion',
+    title:'connexion',
+    loadComponent: ()=>import('./ui/ajouts/connexion.component')
    },
    {
     path: 'lesson',
@@ -45,21 +50,21 @@ export const routes: Routes = [
     canActivate: [()=>inject(RouteService).isLogged()]
    },
    {
-    path: 'studentInfo/:id',
-    title: 'student-info',
-    loadComponent: ()=>import('./ui/details/student-info.component'),
+    path: 'studentDetail/:id',
+    title: 'student-Detail',
+    loadComponent: ()=>import('./ui/details/detail-student.component'),
     canActivate: [()=>inject(RouteService).isLogged()]
    },
    {
-    path: 'lessonInfo/:id',
-    title: 'lesson-info',
-    loadComponent: ()=>import('./ui/details/lesson-info.component'),
+    path: 'lessonDetail/:id',
+    title: 'lesson-Detail',
+    loadComponent: ()=>import('./ui/details/detail-lesson.component'),
     canActivate: [()=>inject(RouteService).isLogged()]
    },
    {
       path:'',
       pathMatch: 'full',
-      redirectTo:'login'
+      redirectTo:'home'
    },
    {
     path:'404',

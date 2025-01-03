@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import { ToolbarComponent } from '../shared/toolbar.component';
+import { Component, input } from '@angular/core';
+import { ok } from '../core/model/valid2.component';
 
 @Component({
   selector: 'app-student-info',
-  imports: [ToolbarComponent],
+  imports: [],
   template: `
-  <app-toolbar title="Etudient"/>
-    <p>
-      student-info works!
-    </p>
+  <br>
+  <h4>nom: {{student().name}}</h4><br>
+  <h4>email: {{student().email}}</h4><br>
+  <h4>password: {{student().pass}}</h4><br>
   `,
   styles: ``
 })
 export default class StudentInfoComponent {
-
+  student=input.required<ok>()
 }
+
+

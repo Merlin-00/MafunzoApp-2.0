@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
-import { ToolbarComponent } from '../shared/toolbar.component';
 import { RouterLink } from '@angular/router';
+import { BarComponent } from '../shared/bar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink,ToolbarComponent],
+  imports: [RouterLink,BarComponent],
   template: `
-    <app-toolbar title="Mafunzo"/>
+    <app-bar/>
   
     <main class="container">
       <h1>
-      <a class="card" [routerLink]="'/student'">voir mes étudients</a>
-      <a class="card" [routerLink]="'/lesson'">voir mes cours</a>
+      <a class="card" [routerLink]="'/student'">voir mes étudients</a><br>
+      <a class="card" [routerLink]="'/lesson'">voir mes cours</a><br>
       <hr>
         Gerer vos cours ainsi que 
         vos étudients d'une manière professionelle
-      </h1>
+      </h1><br>
       <p>
         Nous vous proposons un tableau de bord vous permettant de gerer vos
         sessions, <br />
@@ -31,15 +31,17 @@ import { RouterLink } from '@angular/router';
     align-items: center;
     flex-direction: column;
     .card{
-      padding: 1%;
+      width: 200px;
+      margin: 0 auto;
       text-decoration-line: none;
       font-size: 25px;
       color: rgb(243, 183, 141);
       display: block;
-      border-radius: 2px;
       transition: 250ms ease-in-out;
       &:hover{
-          scale: 0.98;  
+        color: rgb(140, 180, 140);
+        scale: 0.98; 
+        opacity: 0.8;
       } 
     }
     h1{

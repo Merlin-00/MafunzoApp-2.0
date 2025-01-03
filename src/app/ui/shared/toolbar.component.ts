@@ -1,36 +1,34 @@
-import { Component, inject, input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [],
+  imports: [RouterLink],
   template: `
-    <header class="container">
-      <h1><span (click)="retour()"><</span>{{title()}}</h1> 
-    </header>
+    <h1><span routerLink="/"><</span>{{title()}}</h1> 
   `,
   styles: `
-  .container{
-    border-bottom: 1px solid grey;
-    margin: 20px;
-    h1{
-      color: chocolate;
-      display: flex;
-      gap: 30px;
-      span{
-        background: rgb(243, 183, 141);
-        padding-left: 1%;
-        padding-right: 1%;
-      }
+  h1{
+    color: white;
+    margin: 0 auto;
+    padding: 1%;
+    width: 90%;
+    display: flex;
+    gap: 1rem;
+    background-color: rgb(245, 165, 107);
+    margin-bottom: 3%;
+    span{
+      padding-left: 1%;
+      padding-right: 1%;
+      background: white;
+      color: rgb(245, 165, 107);
+      cursor: pointer;
     }
-  }
+}
   `
 })
 export class ToolbarComponent {
-  private route=inject(Router)
-  retour(){
-    localStorage.setItem('logged','true');
-    this.route.navigate(['/'])
-  }
   title= input.required<string>()
 }
+
+

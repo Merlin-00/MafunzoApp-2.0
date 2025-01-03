@@ -4,11 +4,21 @@ import { Component } from '@angular/core';
   selector: 'app-not-found',
   imports: [],
   template: `
-    <p>
-      not-found works!
-    </p>
+  <h1 class="not">
+    404
+  </h1>
+  <p>page not found</p>
   `,
-  styles: ``
+  styles: `
+  .not{
+    color: white;
+    text-align: center;
+    font-size: 500px;
+  }
+  p{
+    font-size: 50px;
+  }
+  `
 })
 export default class NotFoundComponent {
 

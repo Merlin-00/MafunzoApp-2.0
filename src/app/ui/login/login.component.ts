@@ -1,44 +1,40 @@
 import { Component, inject } from '@angular/core';
-import { RouteService } from '../services/route.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   imports: [RouterLink],
   template: `
-  <header class="master">
-    <h1>Bienvenue sur <span>Mafunzo</span></h1>
-    <p>ici nous proposons un programme de formation complet</p>
-
-    <div class="container">
-      <p>vous avez déjà un compte ?</p>
-      <button (click)="connect()">se connecter</button><br>
-      <button [routerLink]="'/connect'">inscrivez-vous</button>
-    </div>
-  </header>
-
-
+      <div class="space"></div>
+      <header class="container">
+        <div class="item">
+          <h1>Bienvenue sur <strong>Mafunzo</strong></h1>
+            <p>Gerez vos sessions, suivez vos étudients et consultez leur feedback</p><br>
+            <p>Avez-vous déjà un compte ?</p><br><br>
+        </div>
+        <button (click)="connect()">se connecter</button>
+        <button  [routerLink]="'/connect'">s'inscrire</button>
+    </header>
   `,
   styles: `
-  span{
+  strong{
     color: chocolate;
   }
-  .master{
-    text-align: center;
-    padding:20px;
-    .container{
-      max-width: 720px;
-      border: 1px solid grey;
-      margin: 0 auto;
-    } 
+  .space{
+    margin: 5%;
   }
- 
+  .container{
+    margin: 0 auto;
+    padding: 5%;
+    max-width: 720px;
+    background-color: white;
+  }
   `
 })
 export default class LoginComponent {
   private route=inject(Router)
   connect(){
     localStorage.setItem('logged','true');
-    this.route.navigate(['/home'])
+    this.route.navigate(['/connexion'])
   }
 }
