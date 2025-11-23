@@ -16,8 +16,8 @@ import { Valid } from '../core/model/valid-model.component';
       (ngSubmit)="onsubmit()"
     >
     @let controls= formData.controls;
-      <label for="nom">votre nom:</label>
-      <input type="text" placeholder="Nom complet" name="nom" formControlName="name">
+      <label for="nom">session name:</label>
+      <input type="text" placeholder="nom de la session" name="nom" formControlName="name">
       @if (controls.name.hasError('required') && controls.name.touched) {
       <span class="erreur">ce champ est obligatoire</span>
       }
@@ -36,9 +36,7 @@ import { Valid } from '../core/model/valid-model.component';
       @if (controls.detail.hasError('required') && controls.detail.touched) {
       <span class="erreur">ce champ est obligatoire</span>
       }
-      <div align="end">
-        <button type="submit">Soumettre</button>
-      </div>
+      <button type="submit">Soumettre</button>
     </form>
   `,
   styles: `

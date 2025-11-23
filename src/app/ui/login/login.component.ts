@@ -1,19 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [],
   template: `
       <div class="space"></div>
       <header class="container">
         <div class="item">
-          <h1>Bienvenue sur <strong>Mafunzo</strong></h1>
+          <h1>Bienvenue sur <strong>Mafunzo</strong></h1><br>
             <p>Gerez vos sessions, suivez vos étudients et consultez leur feedback</p><br>
-            <p>Avez-vous déjà un compte ?</p><br><br>
         </div>
         <button (click)="connect()">se connecter</button>
-        <button  [routerLink]="'/connect'">s'inscrire</button>
     </header>
   `,
   styles: `

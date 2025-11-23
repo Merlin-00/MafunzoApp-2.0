@@ -32,12 +32,6 @@ export const routes: Routes = [
     canActivate: [()=>inject(RouteService).isLogged()]
    },
    {
-      path: 'connect',
-      title: 'new-user',
-      loadComponent: ()=>import('./ui/ajouts/new-user.component'),
-      canActivate: [()=>inject(RouteService).isLogged()]
-     },
-   {
     path: 'addStudent',
     title: 'new-student',
     loadComponent: ()=>import('./ui/ajouts/add-student.component'),
@@ -64,7 +58,7 @@ export const routes: Routes = [
    {
       path:'',
       pathMatch: 'full',
-      redirectTo:'home'
+      redirectTo:'login'
    },
    {
     path:'404',

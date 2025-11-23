@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-toolbar',
   imports: [RouterLink],
   template: `
-    <h1><span routerLink="/"><</span>{{title()}}</h1> 
+    <h1><span routerLink="/home"><</span>{{title()}}</h1> 
   `,
   styles: `
   h1{

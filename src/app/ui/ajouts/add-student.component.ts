@@ -32,9 +32,7 @@ import { ok } from '../core/model/valid2.component';
       @if (controls.pass.hasError('required') && controls.pass.touched) {
       <span class="erreur">ce champ est obligatoire</span>
       }
-      <div align="end">
-        <button type="submit">Soumettre</button>
-      </div>
+      <button type="submit">Soumettre</button>
     </form>
   `,
   styles: `

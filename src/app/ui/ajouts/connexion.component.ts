@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { ToolbarComponent } from '../shared/toolbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-connexion',
-  imports: [ToolbarComponent,FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink],
   template: `
-  <app-toolbar title="connexion"/>
+  <h1><span routerLink="/"><</span>connexion</h1> 
   <form  
       class="form-container" 
       #sessionForm="ngForm"
@@ -17,13 +16,27 @@ import { RouterLink } from '@angular/router';
       <input type="text" placeholder="Nom complet" name="nom" required [(ngModel)]="formData.name">
       <label for="pass">mot de passe:</label>
       <input type="password" name="pass" required [(ngModel)]="formData.pass">
-      <div align="end">
-        <button type="submit" [routerLink]="'/home'" [disabled]="sessionForm.invalid" [class.invalidForm]="sessionForm.invalid">Soumettre</button>
-      </div>
+      <button type="submit" [routerLink]="'/home'">Soumettre</button>
     </form>
   `,
   styles: `
-
+    h1{
+    color: white;
+    margin: 0 auto;
+    padding: 1%;
+    width: 90%;
+    display: flex;
+    gap: 1rem;
+    background-color: rgb(245, 165, 107);
+    margin-bottom: 3%;
+    span{
+      padding-left: 1%;
+      padding-right: 1%;
+      background: white;
+      color: rgb(245, 165, 107);
+      cursor: pointer;
+    }
+}
   `
 })
 export default class ConnexionComponent{
